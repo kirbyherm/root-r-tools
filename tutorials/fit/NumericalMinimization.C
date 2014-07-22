@@ -44,8 +44,8 @@ int NumericalMinimization(const char * minName = "Minuit2",
       ROOT::Math::Factory::CreateMinimizer(minName, algoName);
 
    // set tolerance , etc...
-   min->SetMaxFunctionCalls(1000000); // for Minuit/Minuit2 
-   min->SetMaxIterations(10000);  // for GSL 
+   min->SetMaxFunctionCalls(100000); // for Minuit/Minuit2 
+   min->SetMaxIterations(1000);  // for GSL 
    min->SetTolerance(0.001);
    min->SetPrintLevel(1);
 
@@ -70,7 +70,7 @@ int NumericalMinimization(const char * minName = "Minuit2",
  
    // do the minimization
    min->Minimize(); 
- 
+
    const double *xs = min->X();
    std::cout << "Minimum: f(" << xs[0] << "," << xs[1] << "): " 
              << min->MinValue()  << std::endl;
