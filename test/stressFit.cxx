@@ -70,7 +70,7 @@
 #include "Math/Minimizer.h"
 
 Int_t stressFit(const char *type = "Minuit", const char *algo = "Migrad", Int_t N = 2000);
-Int_t    gVerbose      = -1;
+Int_t    gVerbose      = 1;//-1;
 Double_t gToleranceMult = 1.e-3;
 
 //------------------------------------------------------------------------
