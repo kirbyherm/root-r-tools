@@ -13,9 +13,9 @@ RTOOLSDIRS := $(RTOOLSDIR)/src
 RTOOLSDIRI := $(RTOOLSDIR)/inc/Math
 RTOOLSDIRT := $(call stripsrc,$(RTOOLSDIR)/test)
 
-##### libGenetic #####
+##### libRtools #####
 RTOOLSL    := $(MODDIRI)/LinkDef.h
-RTOOLSDS   := $(call stripsrc,$(MODDIRS)/G__Genetic.cxx)
+RTOOLSDS   := $(call stripsrc,$(MODDIRS)/G__RMinimizer.cxx)
 RTOOLSDO   := $(RTOOLSDS:.cxx=.o)
 RTOOLSDH   := $(RTOOLSDS:.cxx=.h)
 
