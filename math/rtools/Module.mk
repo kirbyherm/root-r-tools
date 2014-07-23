@@ -1,6 +1,6 @@
 # Module.mk for rtools module
 # Copyright (c) 2014 Kirby Hermansen and Lorenzo Moneta
-#
+# Based on GeneticMinimizer Module.mk by Rene Brun and Fons Rademakers
 # Author: Kirby Hermansen, 22/07/2014
 
 MODNAME      := rtools
