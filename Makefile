@@ -308,7 +308,8 @@ MODULES      += proof/afdsmgrd
 endif
 
 ifeq ($(BUILDR),yes)
-MODULES      += r
+MODULES      += r 
+MODULES      += math/rtools 
 endif
 
 -include MyModules.mk   # allow local modules

@@ -25,13 +25,14 @@ class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
 
 	public:
 RMinimizer(Option_t *method);
-virtual ~RMinimizer();
+   virtual ~RMinimizer() {}
 virtual bool Minimize();
 virtual void SetFunction(const ROOT::Math::IMultiGenFunction & func);
 virtual void SetFunction(const ROOT::Math::IMultiGradFunction & gradfunc) { BasicMinimizer::SetFunction(func);}
 	private:
 };
+//RMinimizer::~RMinimizer(){}
 
-
-RMinimizer::~RMinimizer(){}
+}
+}
 #endif

@@ -547,6 +547,7 @@ MEMSTATGUILIBEXTRA      = -Llib -lMemStat -lTree -lGui
 RECLIBEXTRA             = -Llib -lGui -lRIO -lTree -lThread
 FITSIOLIBEXTRA          = -Llib -lHist -lGpad -lGraf -lMatrix
 RLIBEXTRA               = -Llib -lCore -lCint -lMatrix -lreadline
+RTOOLSLIBEXTRA           = -Llib -lCore -lCint -lMatrix -lRInterface -lMathCore
 
 endif
 

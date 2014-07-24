@@ -3,7 +3,7 @@
 #
 # Author: Kirby Hermansen and Lorenzo Moneta, 23/07/2014 
 
-MODNAME      := rtools 
+MODNAME      := rtools
 MODDIR       := $(ROOT_SRCDIR)/math/$(MODNAME)
 MODDIRS      := $(MODDIR)/src
 MODDIRI      := $(MODDIR)/inc
@@ -52,7 +52,7 @@ $(RTOOLSLIB): $(RTOOLSO) $(RTOOLSDO) $(ORDER_) $(MAINLIBS) $(RTOOLSLIBDEP)
 		@$(MAKELIB) $(PLATFORM) $(LD) "$(LDFLAGS)"  \
 		   "$(SOFLAGS)" libRtools.$(SOEXT) $@     \
 		   "$(RTOOLSO) $(RTOOLSDO)" \
-		   "$(RTOOLSLIBEXTRA)"
+		   "$(RTOOLSLIBEXTRA) $(RLIBS)"
 
 $(RTOOLSDS):  $(RTOOLSDH1) $(RTOOLSL) $(RTOOLSLINC) $(ROOTCINTTMPDEP)
 		$(MAKEDIR)
@@ -89,9 +89,7 @@ endif
 		@cd $(RTOOLSDIRT) && $(MAKE)
 
 ##### extra rules ######
-ifneq ($(ICC_MAJOR),)
-# silence warning messages about subscripts being out of range
-$(RTOOLSDO):   CXXFLAGS += -wd175 -I$(RTOOLSDIRI)
-else
-$(RTOOLSDO):   CXXFLAGS += -I$(RTOOLSDIRI)
-endif
+$(RTOOLSO):   CXXFLAGS += $(RFLAGS)
+
+$(RTOOLSDO):   CXXFLAGS += $(RFLAGS)
+

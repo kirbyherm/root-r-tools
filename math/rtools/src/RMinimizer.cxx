@@ -4,9 +4,10 @@
 #include "Math/IFunction.h"
 #include <TVectorD.h>
 #include "Math/BasicMinimizer.h"
-#include "Math/MultiNumGradFunction.h"
+//#include "Math/MultiNumGradFunction.h"
 
-
+namespace ROOT {
+   namespace Math{
 const ROOT::Math::IMultiGenFunction *gFunction;
 
 double minfunction(TVectorD x){
@@ -23,13 +24,12 @@ RMinimizer::RMinimizer(Option_t *method){
 void RMinimizer::SetFunction(const ROOT::Math::IMultiGenFunction & func) { 
    // set the function to minimizer 
    // need to calculate numerically the derivatives: do via class MultiNumGradFunction
-   // no need to clone the passed function
-   gFunction = & func
-   ROOT::Math::MultiNumGradFunction gradFunc(func); 
+   gFunction = &func;
+   //ROOT::Math::MultiNumGradFunction gradFunc(func); 
    // function is cloned inside so can be delete afterwards
    // called base class method setfunction 
    // (note: write explicitly otherwise it will call back itself)
-   BasicMinimizer::SetFunction(gradFunc);
+   BasicMinimizer::SetFunction(func);
 }
 
 //SetFunctions
@@ -81,4 +81,6 @@ r.Parse(cmd2.Data());
 TVectorD  hmin=r.ParseEval("hresult$par").ToVector<Double_t>();
 
 return kTRUE;
+}
+   }
 }
