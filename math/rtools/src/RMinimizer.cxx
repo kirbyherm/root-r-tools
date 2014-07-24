@@ -20,11 +20,12 @@ RMinimizer::RMinimizer(Option_t *method){
 
 }
 
-void RMinimizer::SetFunction(& gFunction) { 
+void RMinimizer::SetFunction(const ROOT::Math::IMultiGenFunction & func) { 
    // set the function to minimizer 
    // need to calculate numerically the derivatives: do via class MultiNumGradFunction
    // no need to clone the passed function
-   ROOT::Math::MultiNumGradFunction gradFunc(gFunction); 
+   gFunction = & func
+   ROOT::Math::MultiNumGradFunction gradFunc(func); 
    // function is cloned inside so can be delete afterwards
    // called base class method setfunction 
    // (note: write explicitly otherwise it will call back itself)
@@ -37,6 +38,7 @@ bool RMinimizer::Minimize()   {
 
 
    (gFunction)= ObjFunction();
+   const ROOT::Math::IMultiGradFunction *gradminfunction = GradObjFunction();
 /*
  *"Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent" (Brent only for 1D minimization)
  */	
@@ -46,6 +48,7 @@ bool RMinimizer::Minimize()   {
 ROOT::R::TRInterface &r=gR->Instance();
 	
 r["minfunction"] = ROOT::R::TRFunction((minfunction));
+r["gradFunc"] = ROOT::R::TRFunction((gradminfunction));
 
 r["method"] = fMethod.c_str();
 std::vector<double> stepSizes(StepSizes(), StepSizes()+NDim());

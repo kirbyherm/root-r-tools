@@ -1,5 +1,5 @@
-#ifndef ROOT_RMinimizer
-#define ROOT_RMinimizer
+#ifndef ROOT_Math_RMinimizer
+#define ROOT_Math_RMinimizer
 
 #ifndef ROOT_TRInterface
 #include "TRInterface.h"
@@ -28,6 +28,7 @@ RMinimizer(Option_t *method);
 virtual ~RMinimizer();
 virtual bool Minimize();
 virtual void SetFunction(const ROOT::Math::IMultiGenFunction & func);
+virtual void SetFunction(const ROOT::Math::IMultiGradFunction & gradfunc) { BasicMinimizer::SetFunction(func);}
 	private:
 };
 
