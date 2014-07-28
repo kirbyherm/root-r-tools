@@ -17,9 +17,10 @@
 #include "Math/BasicMinimizer.h"
 #endif
 
- 
+namespace ROOT {
+   namespace Math{	
 
-class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
+      class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
 	protected:
 		std::string fMethod;
 
@@ -30,9 +31,9 @@ virtual bool Minimize();
 virtual void SetFunction(const ROOT::Math::IMultiGenFunction & func);
 virtual void SetFunction(const ROOT::Math::IMultiGradFunction & gradfunc) { BasicMinimizer::SetFunction(func);}
 	private:
-};
+      };
 //RMinimizer::~RMinimizer(){}
 
-}
+   }
 }
 #endif

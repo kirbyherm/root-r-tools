@@ -8,11 +8,16 @@
 
 namespace ROOT {
    namespace Math{
-const ROOT::Math::IMultiGenFunction *gFunction;
 
-double minfunction(TVectorD x){
+      const ROOT::Math::IMultiGenFunction *gFunction;
+      const ROOT::Math::IMultiGradFunction *gGradFunction;
+
+      double minfunction(TVectorD x){
 	return (*gFunction)(x.GetMatrixArray());
-}
+      }
+      TVectorD mingradfunction(TVectorD y){
+         return (*gGradFunction)(y.Gradient());
+      }
 
 
 RMinimizer::RMinimizer(Option_t *method){
@@ -38,7 +43,7 @@ bool RMinimizer::Minimize()   {
 
 
    (gFunction)= ObjFunction();
-   const ROOT::Math::IMultiGradFunction *gradminfunction = GradObjFunction();
+   (gGradFunction) = GradObjFunction();
 /*
  *"Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent" (Brent only for 1D minimization)
  */	
@@ -48,7 +53,7 @@ bool RMinimizer::Minimize()   {
 ROOT::R::TRInterface &r=gR->Instance();
 	
 r["minfunction"] = ROOT::R::TRFunction((minfunction));
-r["gradFunc"] = ROOT::R::TRFunction((gradminfunction));
+r["gradFunc"] = ROOT::R::TRFunction((mingradfunction));
 
 r["method"] = fMethod.c_str();
 std::vector<double> stepSizes(StepSizes(), StepSizes()+NDim());
