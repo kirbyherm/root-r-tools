@@ -1,2 +1,0 @@
-#define RINCLUDEPATH " -I/Library/Frameworks/R.framework/Resources/include -I/Library/Frameworks/R.framework/Versions/3.1/Resources/library/Rcpp/include -I/Library/Frameworks/R.framework/Versions/3.1/Resources/library/RInside/include" 
-#define RLINKEDLIBS  " -L/Library/Frameworks/R.framework/Resources/lib -lR  -L/Library/Frameworks/R.framework/Versions/3.1/Resources/library/Rcpp/lib -lRcpp -L/Library/Frameworks/R.framework/Versions/3.1/Resources/library/RInside/lib -lRInside"  
