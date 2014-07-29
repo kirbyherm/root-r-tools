@@ -101,7 +101,7 @@ void GSLMinimizer::SetFunction(const ROOT::Math::IMultiGenFunction & func) {
    // set the function to minimizer 
    // need to calculate numerically the derivatives: do via class MultiNumGradFunction
    // no need to clone the passed function
-   ROOT::Math::IMultiGradFunction gradFunc(func); 
+   ROOT::Math::MultiNumGradFunction gradFunc(func); 
    // function is cloned inside so can be delete afterwards
    // called base class method setfunction 
    // (note: write explicitly otherwise it will call back itself)
