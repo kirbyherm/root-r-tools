@@ -16,7 +16,7 @@ namespace ROOT {
 	return (*gFunction)(x.GetMatrixArray());
       }
       TVectorD mingradfunction(const double * y){
-         double * z;
+         TVectorD z;
          gGradFunction->Gradient(y,z);
          return z;
       }
