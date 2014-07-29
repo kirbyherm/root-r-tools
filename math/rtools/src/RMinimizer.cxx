@@ -17,7 +17,8 @@ namespace ROOT {
       }
       TVectorD mingradfunction(const double * y){
          double * z;
-         return gGradFunction->Gradient(y,z);
+         gGradFunction->Gradient(y,z);
+         return z;
       }
 
 
