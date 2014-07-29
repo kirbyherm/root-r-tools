@@ -29,7 +29,7 @@ RMinimizer(Option_t *method);
    virtual ~RMinimizer() {}
 virtual bool Minimize();
 virtual void SetFunction(const ROOT::Math::IMultiGenFunction & func);
-virtual void SetFunction(const ROOT::Math::IMultiGradFunction & gradfunc) { BasicMinimizer::SetFunction(func);}
+virtual void SetFunction(const ROOT::Math::IMultiGradFunction & func) { BasicMinimizer::SetFunction(func);}
 	private:
       };
 //RMinimizer::~RMinimizer(){}
