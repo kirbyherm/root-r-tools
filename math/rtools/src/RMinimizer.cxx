@@ -18,7 +18,7 @@ namespace ROOT {
       double mingradfunction(const double * y){
          double * z;
          gGradFunction->Gradient(y,z);
-         return (*z);
+         return (z);
       }
 
 
