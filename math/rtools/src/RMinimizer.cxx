@@ -10,12 +10,12 @@ namespace ROOT {
    namespace Math{
 
       const ROOT::Math::IMultiGenFunction *gFunction;
-      const ROOT::Math::IMultiGradFunction *gGradFunction;
+//      const ROOT::Math::IMultiGradFunction *gGradFunction;
 
       double minfunction(TVectorD x){
 	return (*gFunction)(x.GetMatrixArray());
       }
-      TVectorD mingradfunction(TVectorD y){
+/*      TVectorD mingradfunction(TVectorD y){
          unsigned int size = y.GetNoElements();
          const double * yy = y.GetMatrixArray();
          double z[size];
@@ -23,7 +23,7 @@ namespace ROOT {
          TVectorD zz(size,z);
          return zz;
       }
-
+*/
 
 RMinimizer::RMinimizer(Option_t *method){
 	fMethod=method;
@@ -48,7 +48,7 @@ bool RMinimizer::Minimize()   {
 
 
    (gFunction)= ObjFunction();
-   (gGradFunction) = GradObjFunction();
+  // (gGradFunction) = GradObjFunction();
 /*
  *"Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent" (Brent only for 1D minimization)
  */	
@@ -58,7 +58,7 @@ bool RMinimizer::Minimize()   {
 ROOT::R::TRInterface &r=gR->Instance();
 	
 r["minfunction"] = ROOT::R::TRFunction((minfunction));
-r["gradFunc"] = ROOT::R::TRFunction((mingradfunction));
+//r["gradFunc"] = ROOT::R::TRFunction((mingradfunction));
 
 r["method"] = fMethod.c_str();
 std::vector<double> stepSizes(StepSizes(), StepSizes()+NDim());
@@ -83,13 +83,13 @@ const double *min=vector.GetMatrixArray();
 SetFinalValues(min);
 SetMinValue((*gFunction)(min));
 //std::cout<<"Value at minimum ="<<MinValue()<<std::endl;
-
+/*
 r.Parse("optimHess(result$par, minfunction, gradFunc)");
 TString cmd2 = TString::Format("hresult <- optim( initialparams, minfunction,NULL, method='%s',hessian = TRUE, control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e))",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
 r.Parse(cmd2.Data());
 //getting the min calculated with the gradient
 TVectorD  hmin=r.ParseEval("hresult$par").ToVector<Double_t>();
-
+*/
 return kTRUE;
 }
    }
