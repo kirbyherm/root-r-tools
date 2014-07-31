@@ -15,10 +15,13 @@ namespace ROOT {
       double minfunction(TVectorD x){
 	return (*gFunction)(x.GetMatrixArray());
       }
-      double mingradfunction(const double * y){
-         double * z;
-         gGradFunction->Gradient(y,z);
-         return (*z);
+      double mingradfunction(TVectorD y){
+         unsigned int size = y.GetNoElements();
+         const double * yy = y.GetMatrixArray();
+         double z[size];
+         gGradFunction->Gradient(yy,z);
+         TVectorD zz(size,z);
+         return zz;
       }
 
 
