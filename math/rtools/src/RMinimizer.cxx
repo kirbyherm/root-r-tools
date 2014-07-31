@@ -15,7 +15,7 @@ namespace ROOT {
       double minfunction(TVectorD x){
 	return (*gFunction)(x.GetMatrixArray());
       }
-      double mingradfunction(TVectorD y){
+      TVectorD mingradfunction(TVectorD y){
          unsigned int size = y.GetNoElements();
          const double * yy = y.GetMatrixArray();
          double z[size];
