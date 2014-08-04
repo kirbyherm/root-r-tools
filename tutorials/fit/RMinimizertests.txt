@@ -1,0 +1,48 @@
+problems with:
+
+ConfidenceInterval.C
+   the confidence interval for the gaussian was very wrong, simply filled in the area under the curve....
+
+ErrorIntegral.C
+   received the following error:
+      "Warning in <TF1Helper::INtegralError>: Last used fitter does no provide parameter errors and a covariance matrix"
+   additionally NCalls was inexplicably 0....
+
+FittingDemo.C
+   visually, fit seemed to be less accurate than the minuit fit
+
+TestBinomial.C
+   received a segmentation violation when fit was attempted....
+
+exampleFit3D.C
+   again a problem with NCalls being 0, must be a bug in the interface
+   errors also left off of the fit values....
+
+fit1.C
+   differed significantly from the function.... major problem here
+
+fit2dHist.C
+   ranges of fits and their accuracies varied wildly in this test
+
+
+
+success with:
+
+fit2.C
+   fit seemed to be even more precise than the minuit
+
+
+extraneous problem:
+
+TwoHistoFit2D.C
+   received an error with both minimizations of 
+      Do global fit
+      Error: Symbol vector<std::pair<double is not defined in current scope  TwoHistoFit2D.C:147:
+      *** Interpreter error recovered ***
+
+combinedFit.C 
+   received an error with both minimizations of 
+      Error: Can't call Fitter::FitFCN(6,globalChi2,0,dataB.Size()+dataSB.Size(),true) in current scope combinedFit.C:115:
+      Possible candidates are...
+      Error: class,struct,union or type Fitter not defined  combinedFit.C:115:
+      *** Interpreter error recovered ***

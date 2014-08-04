@@ -74,8 +74,6 @@ void fitLinear()
    leg->AddEntry(gre4, "-2 + exp(-x)", "p");
    leg->Draw();
    leg->SetFillColor(42);
-
-
 } 
 
 void makePoints(Int_t n, Double_t *x, Double_t *y, Double_t *e, Int_t p)
