@@ -1,3 +1,7 @@
+// Author: K. Hermansen and L. Moneta, Aug 2014 
+
+// Implementation file for class RMinimizer
+
 #ifndef ROOT_Math_RMinimizer
 #define ROOT_Math_RMinimizer
 
@@ -21,34 +25,38 @@ namespace ROOT {
    namespace Math{	
 
       /*! \brief RMinimizer class.
- *
- *    Minimizer class that uses the ROOT/R interface to pass functions and minimize them in R.
- *
- *
- */
+       *
+       *    Minimizer class that uses the ROOT/R interface to pass functions and minimize them in R.
+       */
       class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
-	 protected:
-	    std::string fMethod; /*!< minimizer method to be used, must be of a type listed in R optim or optimx descriptions */
-
-	 private:
+         protected:
+            std::string fMethod; /*!< minimizer method to be used, must be of a type listed in R optim or optimx descriptions */
+         
+         private:
             TVectorD    fErrors; /*!< vector of parameter errors */
             TMatrixD    fCovMatrix; /*!< covariant matrix */
             TMatrixD    fHessMatrix; /*!< Hessian matrix */
-
-	 public:
-            //Default constructor with option method
+         
+         public:
+            /*! \brief Default constructor
+             *
+             * Default constructor with option for the method of minimization, can be any of the following:
+            *"Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent" (Brent only for 1D minimization)
+            *
+            * See R optim or optimx descriptions for more details and options
+            */	
             RMinimizer(Option_t *method);
-            //Destructor
+            ///Destructor
             virtual ~RMinimizer() {}
-            //Function to find the minimum
+            ///Function to find the minimum
             virtual bool Minimize();
-            //Returns the number of function calls
+            ///Returns the number of function calls
             virtual unsigned int NCalls() const;
-            //Returns the ith jth component of the covariant matrix
+            ///Returns the ith jth component of the covariant matrix
             double CovMatrix(unsigned int i, unsigned int j) const;
-            //Returns the vector of parameter errors
+            ///Returns the vector of parameter errors
 //            TVectorD Errors() const;
-            //Returns the ith jth component of the Hessian matrix
+            ///Returns the ith jth component of the Hessian matrix
             double HessMatrix(unsigned int i, unsigned int j) const;
 
       };
