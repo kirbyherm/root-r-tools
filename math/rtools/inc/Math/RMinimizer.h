@@ -20,22 +20,38 @@
 namespace ROOT {
    namespace Math{	
 
+      /*! \brief RMinimizer class.
+ *
+ *    Minimizer class that uses the ROOT/R interface to pass functions and minimize them in R.
+ *
+ *
+ */
       class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
-	protected:
-		std::string fMethod;
+	 protected:
+	    std::string fMethod; /*!< minimizer method to be used, must be of a type listed in R optim or optimx descriptions */
 
-	public:
-RMinimizer(Option_t *method);
-   virtual ~RMinimizer() {}
-virtual bool Minimize();
-// virtual void SetFunction(const ROOT::Math::IMultiGenFunction & func);
-// virtual void SetFunction(const ROOT::Math::IMultiGradFunction & func) { BasicMinimizer::SetFunction(func);}
-         virtual unsigned int NCalls() const; 
-	private:
-//         TVectorD fErrors;
-         std::vector<double> fCovMatrix;
+	 private:
+            TVectorD    fErrors; /*!< vector of parameter errors */
+            TMatrixD    fCovMatrix; /*!< covariant matrix */
+            TMatrixD    fHessMatrix; /*!< Hessian matrix */
+
+	 public:
+            //Default constructor with option method
+            RMinimizer(Option_t *method);
+            //Destructor
+            virtual ~RMinimizer() {}
+            //Function to find the minimum
+            virtual bool Minimize();
+            //Returns the number of function calls
+            virtual unsigned int NCalls() const;
+            //Returns the ith jth component of the covariant matrix
+            double CovMatrix(unsigned int i, unsigned int j) const;
+            //Returns the vector of parameter errors
+//            TVectorD Errors() const;
+            //Returns the ith jth component of the Hessian matrix
+            double HessMatrix(unsigned int i, unsigned int j) const;
+
       };
-//RMinimizer::~RMinimizer(){}
 
    }
 }

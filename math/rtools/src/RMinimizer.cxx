@@ -35,18 +35,7 @@ namespace ROOT {
 
       unsigned int RMinimizer::NCalls() const { return gNCalls; }
 
-/*
-void RMinimizer::SetFunction(const ROOT::Math::IMultiGenFunction & func) { 
-   // set the function to minimizer 
-   // need to calculate numerically the derivatives: do via class MultiNumGradFunction
-   gFunction = &func;
-   //ROOT::Math::MultiNumGradFunction gradFunc(func); 
-   // function is cloned inside so can be delete afterwards
-   // called base class method setfunction 
-   // (note: write explicitly otherwise it will call back itself)
-   BasicMinimizer::SetFunction(func);
-}
-*/
+
 
 //SetFunctions
 
@@ -113,24 +102,39 @@ else {
 
    }
 }
-  
+   r.Parse("print(minfunction)");  
 std::cout << "Calling R with command " << cmd << std::endl;
    
+   r.Parse("print(ndim)");
    r.Parse(cmd.Data());
+if (optimxloaded){
 //get result from R
    r.Parse("par<-coef(result)");
-   TVectorD vector = r.ParseEval("par").ToVector<Double_t>();
 //get hessian matrix (in list form)
    r.Parse("hess<-attr(result,\"details\")[,\"nhatend\"]");
+   r.Parse("print(hess)");
 //convert hess to a matrix
    r.Parse("hess<-sapply(hess,function(x) x)");
+   r.Parse("print(hess)");
 //convert to square matrix
    r.Parse("hess<-matrix(hess,c(ndim,ndim))");
+   r.Parse("print(hess)");
 //find covariant matrix from inverse of hess
    r.Parse("cov<-solve(hess)");
 //get errors from the sqrt of the diagonal of cov
-   r.Parse("errors<-sqrt(diag(cov))");
-
+   r.Parse("errors<-sqrt(abs(diag(cov)))");
+   r.Parse("print(errors)");
+}
+else {
+   r.Parse("par<-result$par");
+   r.Parse("hess<-result$hessian");
+   r.Parse("cov<-solve(hess)");
+   r.Parse("errors<-sqrt(abs(diag(cov)))");
+}
+   TVectorD vector = r.ParseEval("par").ToVector<Double_t>();
+//   fCovMatrix = r.ParseEval("cov").ToMatrix<Double_t>();
+//   fErrors = r.ParseEval("errors").ToVector<Double_t>();
+//   fHessMatrix = r.ParseEval("hess").ToMatrix<Double_t>();
    const double *min=vector.GetMatrixArray();
 
 SetFinalValues(min);
@@ -139,5 +143,21 @@ std::cout<<"Value at minimum ="<<MinValue()<<std::endl;
 
 return kTRUE;
 }
+
+double RMinimizer::CovMatrix(unsigned int i, unsigned int j) const {
+   unsigned int ndim = NDim();
+   if (fCovMatrix==0) return 0;
+   if (i > ndim || j > ndim) return 0;
+   return fCovMatrix[i][j];
+}
+/*TVectorD RMinimizer::Errors() const {
+   return fErrors;
+}*/
+double RMinimizer::HessMatrix(unsigned int i, unsigned int j) const {
+   unsigned int ndim = NDim();
+   if (fHessMatrix==0) return 0;
+   if (i > ndim || j > ndim) return 0;
+   return fHessMatrix[i][j];
+}  
    }
 }
