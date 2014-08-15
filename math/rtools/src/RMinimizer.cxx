@@ -1,5 +1,5 @@
 
-
+#include "TRObjectProxy.h"
 #include "Math/RMinimizer.h"
 #include "Math/IFunction.h"
 #include <TVectorD.h>
@@ -126,13 +126,22 @@ namespace ROOT {
          }
          
          //return the minimum to ROOT
-         TVectorD vector = r.ParseEval("par").ToVector<Double_t>();
+         TVectorD vector = gR->ParseEval("par").ToVector<Double_t>();
+        
+         //due to problems in transferring back to ROOT, the following code was required
+         //code is still in development, the following values cannot be returned currently
+         ROOT::R::TRObjectProxy p = gR->ParseEval("cov"); 
+         TMatrixD cm = p.ToMatrix<Double_t>();
+         p = gR->ParseEval("errors");
+         TVectorD err = p.ToVector<Double_t>();
+         p = gR->ParseEval("hess");
+         TMatrixD hm = p.ToMatrix<Double_t>();
 
-         //the following are still under development
-         //   fCovMatrix = r.ParseEval("cov").ToMatrix<Double_t>();
-         //   fErrors = r.ParseEval("errors").ToVector<Double_t>();
-         //   fHessMatrix = r.ParseEval("hess").ToMatrix<Double_t>();
-         
+         //set covariant and Hessian matrices and error vector
+         fCovMatrix = cm;
+         fErrors = err;
+         fHessMatrix = hm;
+
          //get values and show minimum
          const double *min=vector.GetMatrixArray();
          SetFinalValues(min);
@@ -149,9 +158,9 @@ namespace ROOT {
          return fCovMatrix[i][j];
       }
       //the following is still in development
-      /*TVectorD RMinimizer::Errors() const {
+      TVectorD RMinimizer::RErrors() const {
          return fErrors;
-      }*/
+      }
       //Returns the ith jth component of the Hessian matrix
       double RMinimizer::HessMatrix(unsigned int i, unsigned int j) const {
          unsigned int ndim = NDim();

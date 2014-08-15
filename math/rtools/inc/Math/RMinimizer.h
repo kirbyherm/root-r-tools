@@ -55,7 +55,7 @@ namespace ROOT {
             ///Returns the ith jth component of the covariant matrix
             double CovMatrix(unsigned int i, unsigned int j) const;
             ///Returns the vector of parameter errors
-//            TVectorD Errors() const;
+            TVectorD RErrors() const;
             ///Returns the ith jth component of the Hessian matrix
             double HessMatrix(unsigned int i, unsigned int j) const;
 

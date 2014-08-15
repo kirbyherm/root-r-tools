@@ -127,8 +127,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a3b4f0fadba090949749b35651ae514b7"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_o_o_t_1_1_math_1_1_r_minimizer.html#a3b4f0fadba090949749b35651ae514b7">CovMatrix</a> (unsigned int i, unsigned int j) const </td></tr>
 <tr class="memdesc:a3b4f0fadba090949749b35651ae514b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ith jth component of the covariant matrix.  <a href="#a3b4f0fadba090949749b35651ae514b7">More...</a><br /></td></tr>
 <tr class="separator:a3b4f0fadba090949749b35651ae514b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aaf530d87fc6f14dd6fac9dca59362370"><td class="memItemLeft" align="right" valign="top">TVectorD&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_o_o_t_1_1_math_1_1_r_minimizer.html#aaf530d87fc6f14dd6fac9dca59362370">RErrors</a> () const </td></tr>
+<tr class="memdesc:aaf530d87fc6f14dd6fac9dca59362370"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of parameter errors.  <a href="#aaf530d87fc6f14dd6fac9dca59362370">More...</a><br /></td></tr>
+<tr class="separator:aaf530d87fc6f14dd6fac9dca59362370"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac06184ce4b10fe2dc6f5d82b8d4502bc"><td class="memItemLeft" align="right" valign="top">double&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_r_o_o_t_1_1_math_1_1_r_minimizer.html#ac06184ce4b10fe2dc6f5d82b8d4502bc">HessMatrix</a> (unsigned int i, unsigned int j) const </td></tr>
-<tr class="memdesc:ac06184ce4b10fe2dc6f5d82b8d4502bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the vector of parameter errors.  <a href="#ac06184ce4b10fe2dc6f5d82b8d4502bc">More...</a><br /></td></tr>
+<tr class="memdesc:ac06184ce4b10fe2dc6f5d82b8d4502bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the ith jth component of the Hessian matrix.  <a href="#ac06184ce4b10fe2dc6f5d82b8d4502bc">More...</a><br /></td></tr>
 <tr class="separator:ac06184ce4b10fe2dc6f5d82b8d4502bc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pro-attribs"></a>
@@ -227,7 +230,7 @@ Private Attributes</h2></td></tr>
 
 <p>Returns the ith jth component of the covariant matrix. </p>
 
-<p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00145">145</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
+<p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00154">154</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
 
 </div>
 </div>
@@ -255,10 +258,9 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Returns the vector of parameter errors. </p>
-<p>Returns the ith jth component of the Hessian matrix </p>
+<p>Returns the ith jth component of the Hessian matrix. </p>
 
-<p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00156">156</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
+<p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00165">165</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
 
 </div>
 </div>
@@ -315,6 +317,25 @@ Private Attributes</h2></td></tr>
 <p>returns number of function calls </p>
 
 <p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00043">43</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
+
+</div>
+</div>
+<a class="anchor" id="aaf530d87fc6f14dd6fac9dca59362370"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">TVectorD ROOT::Math::RMinimizer::RErrors </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Returns the vector of parameter errors. </p>
+
+<p>Definition at line <a class="el" href="_r_minimizer_8cxx_source.html#l00161">161</a> of file <a class="el" href="_r_minimizer_8cxx_source.html">RMinimizer.cxx</a>.</p>
 
 </div>
 </div>
@@ -418,7 +439,7 @@ Private Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Aug 15 2014 10:57:20 for ROOT Mathematical Libraries by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Aug 15 2014 12:04:40 for ROOT Mathematical Libraries by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.7
 </small></address>
