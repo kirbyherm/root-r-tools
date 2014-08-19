@@ -60,6 +60,7 @@ namespace ROOT {
          std::vector<double> stepSizes(StepSizes(), StepSizes()+NDim());
          std::vector<double> values(X(), X()+NDim());
          r["ndim"] = NDim();
+         int ndim = NDim();
          r["stepsizes"] = stepSizes;
          r["initialparams"] = values;
 
@@ -97,7 +98,7 @@ namespace ROOT {
                cmd = TString::Format("result <- optim( initialparams, minfunction,mingradfunction, method='%s', control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e))",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
             }
          }
-         
+         //execute the minimization in R         
          std::cout << "Calling R with command " << cmd << std::endl;   
          r.Parse(cmd.Data());
          
@@ -128,8 +129,7 @@ namespace ROOT {
          //return the minimum to ROOT
          TVectorD vector = gR->ParseEval("par").ToVector<Double_t>();
         
-         //due to problems in transferring back to ROOT, the following code was required
-         //code is still in development, the following values cannot be returned currently
+         //get errors and matrices from R
          ROOT::R::TRObjectProxy p = gR->ParseEval("cov"); 
          TMatrixD cm = p.ToMatrix<Double_t>();
          p = gR->ParseEval("errors");
@@ -138,6 +138,9 @@ namespace ROOT {
          TMatrixD hm = p.ToMatrix<Double_t>();
 
          //set covariant and Hessian matrices and error vector
+         fCovMatrix.ResizeTo(ndim,ndim);
+         fHessMatrix.ResizeTo(ndim,ndim);
+         fErrors.ResizeTo(ndim);
          fCovMatrix = cm;
          fErrors = err;
          fHessMatrix = hm;
@@ -157,7 +160,7 @@ namespace ROOT {
          if (i > ndim || j > ndim) return 0;
          return fCovMatrix[i][j];
       }
-      //the following is still in development
+      //Returns the full parameter error vector
       TVectorD RMinimizer::RErrors() const {
          return fErrors;
       }

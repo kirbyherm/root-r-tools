@@ -27,6 +27,13 @@ namespace ROOT {
       /*! \brief RMinimizer class.
        *
        *    Minimizer class that uses the ROOT/R interface to pass functions and minimize them in R.
+       *    
+       *    The class implements the ROOT::Math::Minimizer interface and can be instantiated using the 
+       *    ROOT plugin manager (plugin name is "RMinimizer"). The various minimization algorithms 
+       *    (BFGS, Nelder-Mead, SANN, etc..) can be passed as an option. 
+       *    The default algorithm is BFGS.
+       *
+       *    The library for this and future R/ROOT classes is currently libRtools.so
        */
       class   RMinimizer  :   public  ROOT::Math::BasicMinimizer    {
          protected:
@@ -43,7 +50,8 @@ namespace ROOT {
              * Default constructor with option for the method of minimization, can be any of the following:
             *"Nelder-Mead", "BFGS", "CG", "L-BFGS-B", "SANN", "Brent" (Brent only for 1D minimization)
             *
-            * See R optim or optimx descriptions for more details and options
+            *See R optim or optimx descriptions for more details and options.
+            *
             */	
             RMinimizer(Option_t *method);
             ///Destructor
