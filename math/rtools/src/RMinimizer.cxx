@@ -91,11 +91,11 @@ namespace ROOT {
          else {  
             if (!gGradFunction) { 
                // not using gradient function
-               cmd = TString::Format("result <- optim( initialparams, minfunction,method='%s',control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e))",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
+               cmd = TString::Format("result <- optim( initialparams, minfunction,method='%s',control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e),hessian=TRUE)",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
             }
             else { 
                // using user provided gradient 
-               cmd = TString::Format("result <- optim( initialparams, minfunction,mingradfunction, method='%s', control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e))",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
+               cmd = TString::Format("result <- optim( initialparams, minfunction,mingradfunction, method='%s', control = list(ndeps=stepsizes,maxit=%d,trace=%d,abstol=%e),hessian=TRUE)",fMethod.c_str(),MaxIterations(),PrintLevel(),Tolerance());
             }
          }
          //execute the minimization in R         

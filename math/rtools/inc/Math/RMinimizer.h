@@ -60,13 +60,32 @@ namespace ROOT {
             virtual bool Minimize();
             ///Returns the number of function calls
             virtual unsigned int NCalls() const;
-            ///Returns the ith jth component of the covariant matrix
-            double CovMatrix(unsigned int i, unsigned int j) const;
-            ///Returns the vector of parameter errors
-            TVectorD RErrors() const;
             ///Returns the ith jth component of the Hessian matrix
             double HessMatrix(unsigned int i, unsigned int j) const;
-
+            /// minimizer provides error and error matrix
+            virtual bool ProvidesError() const { return false; }
+            /// return errors at the minimum
+            virtual const double * Errors() const { return NULL; }
+            /** return covariance matrices element for variables ivar,jvar
+            if the variable is fixed the return value is zero
+            The ordering of the variables is the same as in the parameter and errors vectors
+            */
+            virtual double CovMatrix(unsigned int  ivar , unsigned int jvar ) const {
+               MATH_UNUSED(ivar); MATH_UNUSED(jvar);
+               return 0;
+            }
+            /**
+            Fill the passed array with the  covariance matrix elements
+            if the variable is fixed or const the value is zero.
+            The array will be filled as cov[i *ndim + j]
+            The ordering of the variables is the same as in errors and parameter value.
+            This is different from the direct interface of Minuit2 or TMinuit where the
+            values were obtained only to variable parameters
+            */
+            virtual bool GetCovMatrix(double * covMat) const {
+               MATH_UNUSED(covMat);
+               return false;
+            }
       };
 
    }
